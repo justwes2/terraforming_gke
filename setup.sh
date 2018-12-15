@@ -20,9 +20,10 @@ echo "**************************************************************************
 # Create Terraform service account
 echo "${bold}Creating GCP service account for Terraform...${normal}"
 gcloud iam service-accounts create terraform-sa --display-name terraform-sa #need to add -sa to sa name or else command hangs. Reserved word?
-export TERRAFORM_SA_EMAIL=$(gcloud iam service-accounts list  --filter="displayName:terraform-sa"  --format='value(email)')
+export TERRAFORM_SA_EMAIL=$(gcloud iam service-accounts list --filter="displayName:terraform-sa"  --format='value(email)')
 echo "********************************************************************************"
-
+# Create project
+export PROJECT=$(gcloud info --format='value(config.project)')
 # Give Terraform SA  roles/owner IAM permissions
 echo "${bold}Creating GCP IAM role bindings for terraform and spinnaker service accounts...${normal}"
 gcloud projects add-iam-policy-binding $PROJECT --role roles/owner --member serviceAccount:$TERRAFORM_SA_EMAIL
