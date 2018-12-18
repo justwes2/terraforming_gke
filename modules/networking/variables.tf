@@ -7,7 +7,7 @@ variable "vpc" {
 }
 
 variable "credentials" {
-  default = "./credentials.json"
+  default = "credentials.json"
 }
 
 variable "region" {

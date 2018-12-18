@@ -1,10 +1,10 @@
 # configures gcp information- running in cloudshell for now so /shrug
-#provider "google" {
-#  version     = "~> 1.13"
-#  credentials = "${file("${var.credentials}")}"
-#  project     = "${var.project}"
-#  region      = "${var.region}"
-#}
+provider "google" {
+  version     = "~> 1.13"
+  credentials = "${file("${path.module}/${var.credentials}")}"
+  project     = "${var.project}"
+  region      = "${var.region}"
+}
 
 # creates vpc for cluster
 resource "google_compute_network" "vpc" {
